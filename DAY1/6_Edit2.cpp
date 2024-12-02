@@ -47,7 +47,7 @@ public:
 class NumEdit : public Edit
 {
 public:
-	void validate(char c) override
+	bool validate(char c) override
 	{
 		return isdigit(c);
 	}
