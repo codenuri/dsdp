@@ -57,6 +57,7 @@ int main()
 {
 //	Edit e;
 	NumEdit e;
+//	AdressEdit e2; // 다른 정책을 가진 새로운 edit
 
 	while (1)
 	{

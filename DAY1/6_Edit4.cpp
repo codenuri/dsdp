@@ -47,3 +47,8 @@ class Rect : public Shape
 {
 	virtual void draw_imp() {}
 };
+
+// C++ GUI 라이브러리중 QT, MFC 라는 것이 있습니다
+
+// MFC 의 CEdit 클래스 - Edit2.cpp 처럼 되어 있습다.
+// QT  의 QEdit 클래스 - Edit3.cpp  

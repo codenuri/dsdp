@@ -92,6 +92,10 @@ int main()
 	e.set_validator(&v); // e 객체에 "값의 유효성을 체크하는 객체 전달"
 
 
+	LimitDigitValidator v2(15);
+	e.set_validator(&v2); // 동일한 edit 가 validation 정책만 변경했다.
+						  // 즉, 실행시간에 정책(알고리즘)의 교체
+
 	while (1)
 	{
 		std::cout << e.get_data() << std::endl;

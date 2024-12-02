@@ -13,7 +13,7 @@ public:
 
 		while (1)
 		{
-			char c = _getch(); // 한자 입력
+			char c = _getch(); // 키보드에서 직접 한글자 입력(enter 필요없이)
 
 			if (c == 13) break;
 
