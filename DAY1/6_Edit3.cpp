@@ -76,6 +76,13 @@ public:
 	}
 };
 
+// 이제 다양한 형태의 validator 를 제공하면 됩니다.
+// EmailValidator, PhoneNumberValidator, ....
+
+// 복습하실때, 다양한 형태의 Validator 만들어서 사용해 보세요
+// => 아주 편리하다는 것을 느낄수 있습니다.
+
+
 int main()
 {
 	Edit e;
