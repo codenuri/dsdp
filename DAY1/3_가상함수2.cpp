@@ -5,7 +5,10 @@
 class Base
 {
 public:
-	~Base() {}
+//	~Base() {}
+	virtual ~Base() {}  // 가상 소멸자 
+						// 기반 클래스 소멸자가 virtual 이면
+						// 파생 클래스 소멸자도 모두 자동으로 virtual 입니다.
 };
 class Derived : public Base
 {
@@ -36,3 +39,4 @@ int main()
 	// 가상함수라면      : dynamic binding. 메모리 조사후 결정
 
 }	
+
