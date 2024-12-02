@@ -23,10 +23,16 @@ public:
 int main()
 {
 	Base* p = new Derived;
-	delete p;	// 컴파일 에러, protected 소멸자
+
+//	delete p;	// 컴파일 에러, protected 소멸자
 
 	delete  static_cast<Derived*>(p); // ok
 
 }
+
+// 구글, "C++ core guideline" 검색
+// 1번째 링크 선택
+// => C++ 창시자와 표준 위원장을 했던 개발자가 만들고 있는 
+//    guide line
 
  
