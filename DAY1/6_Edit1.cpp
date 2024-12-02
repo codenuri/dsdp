@@ -19,7 +19,7 @@ public:
 
 			if ( isdigit(c)  )
 			{
-				data.append(c);
+				data.push_back(c);
 				std::cout << c;
 			}
 		}
