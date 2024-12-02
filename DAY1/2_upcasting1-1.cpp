@@ -5,7 +5,11 @@ class Animal
 {
 public:
 	int age;
+
+	virtual ~Animal() {} // 가상 소멸자, 다음시간에 자세히 배우는 문법
+						// 지금은 "Animal 에 가상함수가 있다" 만 생각하세요
 };
+
 class Dog : public Animal
 {
 public:
@@ -44,6 +48,13 @@ int main()
 	//				  실행시간에 p1이 가리키는 곳을 조사해서
 	//				  Dog 가 맞을때만 캐스팅 성공.
 	//				  Dog 가 아닌 경우 0 반환
+
+	// 단, dynamic_cast 를 사용하려면, 객체 생성시 타입정보가 같이 
+	// 메모리에 있어야 합니다.
+	// C++은 가상함수 테이블을 사용해서 타입 정보를 관리합니다.
+	// => 따라서, dynamic_cast 를 사용하려면 
+	//    가상함수가 1개 이상 있는 타입만 가능합니다.
+
 	Dog* pdog2 = dynamic_cast<Dog*>(p1);
 
 	std::cout << pdog2 << std::endl;
