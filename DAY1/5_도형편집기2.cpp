@@ -27,7 +27,7 @@ int main()
 		int cmd;
 		std::cin >> cmd;
 
-		if      (cmd == 1) v.push_back(new Rect)
+		if (cmd == 1) v.push_back(new Rect);
 		else if (cmd == 2) v.push_back(new Circle);
 		else if (cmd == 9)
 		{
