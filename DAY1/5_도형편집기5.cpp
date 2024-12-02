@@ -58,6 +58,22 @@ int main()
 			// k 번째 도형의 복사본을 생성해서 v 에 추가 합니다
 			// 어떻게 구현해야 할까요 ?
 			// k 번째 만든 도형은 뭘까요 ?
+
+			
+			// 아래 처럼 했다면 역시 OCP 만족할수 없는 코드
+			// => 그래서 dynamic_cast 를 사용하는 것은 좋은 디자인이 아니다.
+			if (dynamic_cast<Rect*>(v[k]) != nullptr)
+			{
+				Rect* r = new Rect;
+			//	r->set_color = v[k]->color; // v[k] 의 모든 속성을 r에 복사
+				v.push_back(r);
+			}
+			else if (dynamic_cast<Circle*>(v[k]) != nullptr)
+			{
+				Circle* c = new Circle;
+				
+				v.push_back(c);
+			}
 		}
 	}
 }
