@@ -1,6 +1,19 @@
 #include <iostream>
 #include <vector>
 
+// 1. 디자인 패턴이란 ? 
+// => 1994년 발간된 책의 제목. 4명의 저자
+// => 당시 유명한 오픈소스들이 사용하던 기법에 이름을 부여 한것
+// => 23개의 이름 부여
+// => 4명의 저자를 "도둑" 이라는 의미로 Gang's Of Four 라고합니다.
+// => 그래서 "GOF's Design Pattern"
+
+// 2. Prototype 패턴
+// => 견본이 되는 객체를 만들고, 복사본을 만들게 하는 기법
+// => clone() 가상함수
+// => 오늘은 소개, 목요일날 제대로 등장
+
+
 
 
 class Shape
@@ -38,8 +51,12 @@ public:
 
 	virtual Shape* clone()
 	{
-		Rect* s = new Rect;
-		return s;
+//		Rect* s = new Rect;
+//		return s;
+		return new Rect(*this);
+				// *this(나)와 동일한 Rect 만들어 달라. 복사 생성자사용
+				// *this 의 메모리를 통째로 복사해서 만들게 됩니다.
+		
 	}
 };
 
@@ -51,8 +68,7 @@ public:
 
 	virtual Shape* clone()
 	{
-		Circle* s = new Circle;
-		return s;
+		return new Circle(*this);
 	}
 };
 
