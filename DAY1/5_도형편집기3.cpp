@@ -54,6 +54,6 @@ int main()
 // OCP(Open Close Principle, 개방 폐쇄의 법칙)
 
 // S/W 설계의 5대 원칙
-// SRP, OCP, LSP, ISP, DIP
+// SRP, OCP, LSP, ISP, DIP  => SOLID 원칙
 
 // 위 코드는 OCP를 위반한 좋지 않은 설계 입니다.
