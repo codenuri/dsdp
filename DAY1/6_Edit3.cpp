@@ -27,8 +27,12 @@ class Edit
 {
 	std::string data;
 
-
+	IValidator* val = nullptr;
 public:
+	void set_validator(IValidator* p) { val = p; }
+
+
+
 	std::string get_data()
 	{
 		data.clear();
@@ -39,8 +43,8 @@ public:
 
 			if (c == 13) break;
 
-			if (isdigit(c))
-			{
+			if ( val->validate(data, c) ) // 값의 유효성 여부 판단을
+			{							// 다른 객체에 위임
 				data.push_back(c);
 				std::cout << c;
 			}
