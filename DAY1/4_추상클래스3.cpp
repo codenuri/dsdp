@@ -10,7 +10,12 @@ public:
 	virtual void take() = 0;
 };
 
-
+// 카메라 사용자는 "특정 제품의 이름" 이 아닌 "규칙이름" 으로 사용하면됩니다.
+class People
+{
+public:
+	void use_camera(? c) { c->take(); }
+};
 
 
 
