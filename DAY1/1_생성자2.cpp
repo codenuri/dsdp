@@ -15,7 +15,8 @@ class Derived : public Base
 public:
 	// 핵심 #1. 아래 코드가 왜 에러인지 생각해 보세요
 //	Derived()		{ }		// Derived()	  : Base()	{ }
-//	Derived(int a)	{ }		// Derived(int a) : Basae()	{ }
+//	Derived(int a)	{ }		// Derived(int a) : Base()	{ }
+
 
 	// 핵심 #2. 기반 클래스에 디폴트 생성자가 없다면 
 	//         반드시 파생 클래스 생성자에서 에서 기반 클래스 생성자를
