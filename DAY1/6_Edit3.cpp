@@ -41,10 +41,10 @@ public:
 		{
 			char c = _getch(); 
 
-			if (c == 13) break;
+			if (c == 13 && (val == nullptr || val->is_complete(data) )  ) break;
 
-			if ( val->validate(data, c) ) // 값의 유효성 여부 판단을
-			{							// 다른 객체에 위임
+			if ( val == nullptr || val->validate(data, c) ) // 값의 유효성 여부 판단을
+			{												// 다른 객체에 위임
 				data.push_back(c);
 				std::cout << c;
 			}
@@ -58,7 +58,7 @@ public:
 
 // 입력값의 유효성을 조사하는 클래스
 
-class LimitDigitValidator
+class LimitDigitValidator : public IValidator
 {
 	int limit;
 public:
