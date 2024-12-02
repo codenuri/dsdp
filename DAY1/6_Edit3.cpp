@@ -8,25 +8,26 @@
 // 1. 변하는 것을 가상함수로 - template method 패턴, Edit2.cpp
 // 2. 변하는 것을 다른 클래스로 - strategy 패턴,     Edit3.cpp
 
+// 모든 Validator 가 지켜야 하는 공통의 인터페이스 (규칙)먼저 설계
 
-// 입력값의 유효성을 조사하는 클래스
-
-class LimitDigitValidator
+struct IValidator
 {
-	int limit;
-public:
-	LimitDigitValidator(int n) : limit(n) {}
+	virtual bool validate(const std::string& s, char c) = 0;
+	virtual bool is_complete(const std::string& s) { return true; }
 
-	bool validate(const std::string& s, char c)
-	{
-		return s.size() < limit && isdigit(c);
-	}
+	virtual ~IValidator() {}
 };
+
+// 주민 등록 번호 : 961  1      확인
+
+
 
 
 class Edit
 {
 	std::string data;
+
+
 public:
 	std::string get_data()
 	{
@@ -46,6 +47,22 @@ public:
 		}
 		std::cout << '\n';
 		return data;
+	}
+};
+
+
+
+// 입력값의 유효성을 조사하는 클래스
+
+class LimitDigitValidator
+{
+	int limit;
+public:
+	LimitDigitValidator(int n) : limit(n) {}
+
+	bool validate(const std::string& s, char c)
+	{
+		return s.size() < limit && isdigit(c);
 	}
 };
 
