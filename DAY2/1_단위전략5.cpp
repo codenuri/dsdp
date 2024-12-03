@@ -27,6 +27,14 @@ public:
 		free(p);
 	}
 
+	// 위 2개가 핵심이고, 아래 3개가 더필요합니다. 관례적인 코드
+	// 항상 복사해서 사용하면 됩니다.
+	using value_type = T;
+
+	debug_alloc() {}
+
+	template<typename U> debug_alloc(const debug_alloc<U>&) {}
+							// generic 생성자 개념. 
 };
 
 
