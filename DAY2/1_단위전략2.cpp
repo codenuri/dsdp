@@ -1,3 +1,5 @@
+#include <cstdlib> // malloc/free
+
 // github.com/codenuri/day2.zip
 // 
 // vector 의 동작 방식은 변하지 않습니다.
@@ -46,6 +48,7 @@ public:
 		free(p);
 	}
 };
+
 int main()
 {
 //	vector<int> v(4);
