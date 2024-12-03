@@ -62,7 +62,10 @@ class ObjectAdater : public Shape
 public:
 	ObjectAdater(TextView* v) : tview(v) {}
 
-	
+	void draw() override
+	{
+		tview->show();
+	}
 };
 
 
@@ -74,7 +77,13 @@ int main()
 						  // tv       : 객체(변수)
 
 	// 이미 생성된 객체 tv 를 v에 넣을수 있을까요 ?
-	v.push_back(&tv); // ??
+//	v.push_back(&tv); // error
+
+
+	v.push_back( new ObjectAdater(&tv) ); // ok..
+											// 객체 어답터 사용
+
+	v[0]->draw();
 }
 
 
