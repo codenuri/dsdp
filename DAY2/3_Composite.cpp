@@ -57,6 +57,8 @@ public:
 
 int main()
 {
+	// 아래 객체 관계 구조를 그림으로 그리면
+	// 자료구조 "Tree" 형태가 됩니다.
 	Folder* root = new Folder("ROOT");
 	Folder* fo1  = new Folder("A");
 	Folder* fo2  = new Folder("B");
@@ -77,3 +79,9 @@ int main()
 	std::cout << root->get_size() << std::endl; // 30
 }
 
+// 핵심
+// => 결국, 위 File/Foloder의 관계는
+// =>         MenuItem/PopupMenu 의 관계와 동일하고 코드도 거의 유사합니다
+
+// 이런 구조로 코드를 만드는 것을
+// "Composite" 패턴 이라고 합니다.
