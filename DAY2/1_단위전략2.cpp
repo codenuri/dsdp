@@ -35,6 +35,8 @@ public:
 template<typename T> class MallocVector : public vector<T>
 {
 public:
+	MallocVector( int sz ) : vector<T>(sz) {}
+
 	virtual T* allocate(int sz) 
 	{ 
 		return static_cast<T*>(malloc(sizeof(T) * sz));
