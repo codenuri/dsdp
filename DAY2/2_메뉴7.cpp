@@ -78,6 +78,8 @@ public:
 
 		}
 	}
+
+	BaseMenu* submenu(int idx) { return v[idx]; }
 };
 
 int main()
@@ -89,7 +91,16 @@ int main()
 	root->add(new MenuItem("REBOOT", 21));
 
 	//----------------------------------------------
-	auto m = root->submenu(0); 
+	auto m = root->submenu(0); // m은 "색상변경" 메뉴의 포인터
+
+	// 아래 한줄을 생각해 봅시다.
+//	root->submenu(0)->add( new MenuItem("RED", 11) );
+						// => error
+						// => "add" 는 PopupMenu에 있는데
+						// => "submenu" 이 반환 타입은 "BaseMenu*" 이므로
+
+	// 아래 처럼 캐스팅해서 사용하면 됩니다.
+	static_cast<PopupMenu*>(root->submenu(0))->add(new MenuItem("RED", 11));
 
 
 
