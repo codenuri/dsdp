@@ -56,7 +56,7 @@ public:
 			if (cmd == sz + 1) // 종료메뉴 선택시
 				break;
 
-			if (cmd < 1 && cmd > sz + 1) // 잘못된 입력
+			if (cmd < 1 || cmd > sz + 1) // 잘못된 입력
 				continue ;
 
 
