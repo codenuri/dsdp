@@ -71,4 +71,22 @@ int main()
 
 	ZipDecorator zd(&ed);
 	zd.write("Hello");	
+//	fs.write("hello");
+
+	// 아래 처럼 하면 안되나요 ?
+	// => 아래 모델은 "filter" 추가후에
+	// => 다시 데이타 변형없이 write 하려면 필터를 다시 제거해야 합니다.
+	// => 그런데, 위 모델은 언제라도 가능
+	/*
+	FileStream fs("a.txt");
+
+	fs.add_filter(new ZipFilter);
+	fs.add_filter(new EncryptFilter);
+
+	fs.write("hello"); // "hello" 를 등록된 필터에게 먼저 보내서 데이타 변형후
+						// 쓰기
+	*/
 }
+
+// 구글에서 "C# Stream" 검색 하세요
+// => 이미지 보기 로 해보세요
