@@ -36,17 +36,24 @@ public:
 
 class Folder : public Component
 {
-	std::vector< ? > v;
+	std::vector<Component*> v;
 public:
-	Folder(? ) {} // 생성자 만드세요
+	Folder(const std::string& name )
+		: Component(name) {} 
 
-	void add(? c) { ? }
+	void add(Component* c) { v.push_back(c); }
 
 	int get_size() override
 	{
-		? ;
+		int size = 0;
+		for (auto e : v)
+			size += e->get_size();
+
+		return size;
 	}
 };
+
+
 
 int main()
 {
