@@ -49,6 +49,8 @@ int main()
 	emo.draw();			
 
 
-	Frame frame(&ps);
+//	Frame frame(&ps);
+	Frame frame(&emo);	// 현재 코드는 에러!!. 
+						// 해결책은 다음소스에서 
 	frame.draw();
 }
