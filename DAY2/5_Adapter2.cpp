@@ -41,6 +41,7 @@ public:
 // 클래스 어답터 : 클래스 인터페이스 변경
 // 객체   어답터 : 객체   인터페이스 변경
 
+// 아래 코드는 클래스 어답터 입니다.
 class Text : public TextView,  public Shape     
 {
 public:
@@ -51,6 +52,19 @@ public:
 		TextView::show();
 	}
 };
+
+// 아래 코드가 객체 어답터 입니다.
+// => "이미 생성되어 있는" TextView 객체의 인터페이스를 변경하겠다는 의도
+class ObjectAdater : public Shape
+{
+	TextView* tview; // 핵심 : 포인터 또는 참조 멤버
+					 // 의도 : 이미 만들어진 객체를 가리키겠다는것
+public:
+	ObjectAdater(TextView* v) : tview(v) {}
+
+	
+};
+
 
 int main()
 {
