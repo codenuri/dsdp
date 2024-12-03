@@ -5,9 +5,27 @@
 // #1. 반드시 템플릿일 필요는 없지만, 다양한 타입의 메모리 할당을 위해서
 //     대부분 템플릿으로 작성
 
+// #2. 반드시 약속된 함수를 만들어야 합니다.
+//     (cppreference.com 에서 화면 왼쪽에 "Named Requirement" 선택)
+
 template<typename T> class debug_alloc
 {
 public:
+	inline T* allocate(std::size_t sz)
+	{
+		void* p = malloc(sizeof(T) * sz);
+
+		printf("[debug_alloc] allocate %p, %d cnts\n", p, sz);
+		
+		return static_cast<T*>(p);
+	}
+
+	inline void deallocate(T* p, std::size_t sz)
+	{
+		printf("[debug_alloc] deallocate %p, %d cnts\n", p, sz);
+
+		free(p);
+	}
 
 };
 
