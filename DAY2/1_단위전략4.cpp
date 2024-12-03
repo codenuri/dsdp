@@ -2,8 +2,9 @@
 
 // 방법 #3. 단위전략 디자인(Policy Base Design)
 
-
-template<typename T, typename Alloc>
+// std::allocator<T> : C++ 표준에 이미 있는 메모리 할당기
+//					   내부적으로 new, delete 사용
+template<typename T, typename Alloc = std::allocator<T> >
 class vector
 {
 	T* buff = nullptr;
@@ -39,7 +40,8 @@ public:
 
 int main()
 {
-	vector<int, MallocAllocator<int>> v(4); 
+//	vector<int, MallocAllocator<int>> v(4); 
+	vector<int> v(4); // 표준 할당기 사용
 }
 
 
