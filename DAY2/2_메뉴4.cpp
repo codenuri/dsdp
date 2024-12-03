@@ -81,7 +81,8 @@ int main()
 
 	PopupMenu pm("오늘의 점심 메뉴");
 
-	pm.add(&kimbab); // 핵심 ????!!!
+	pm.add(&kimbab); // 핵심.. 현재 코드는 에러
+					 //       해결책은 다음소스에서...
 	pm.add(&m9);
 
 	pm.command(); 
