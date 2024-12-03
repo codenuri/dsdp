@@ -22,7 +22,7 @@ public:
 
 	// 아래 멤버 함수는 Popup에만 있으면 되지만
 	// "캐스팅 없이 사용하게 하기 위해" Base에도 추가
-	virtual void add(MenuItem* m)      { throw unsupported_operation(); }
+	virtual void add(BaseMenu* m)      { throw unsupported_operation(); }
 	virtual BaseMenu* submenu(int idx) { throw unsupported_operation(); }
 };
 
@@ -124,3 +124,12 @@ int main()
 
 
 
+
+// add, submenu 를 BaseMenu 에 넣는 모델
+// => 캐스팅이 없이 사용가능하게 되므로 편리합니다
+// => 편의 모델!!
+
+// add, submenu 를 BaseMenu 에 넣지 않는 모델
+// => 캐스팅이 필요해 질수 있으므로 편리하지 않지만
+// => 항상 캐스팅을 통해서 의도가 표현되므로 "안전 합니다"
+// => 안전성을 중시하는 모델..
