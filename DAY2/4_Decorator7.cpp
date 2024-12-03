@@ -37,7 +37,7 @@ class ZipDecorator : public Stream
 	Stream* origin; // 핵심 : 포인터 또는 참조
 					// 의도 : 외부에 이미 생성된 객체를 가리키겠다는것
 public:
-	ZipDecorator(Stream* s) : stream(s) {}
+	ZipDecorator(Stream* s) : origin(s) {}
 
 	void write(const std::string& s)
 	{
@@ -51,7 +51,7 @@ class EncryptDecorator : public Stream
 {
 	Stream* origin; 
 public:
-	EncryptDecorator(Stream* s) : stream(s) {}
+	EncryptDecorator(Stream* s) : origin(s) {}
 
 	void write(const std::string& s)
 	{
@@ -66,7 +66,7 @@ int main()
 	FileStream fs("a.txt");
 	fs.write("Hello");
 
-	EncrpytDecorator ed(&fs);
+	EncryptDecorator ed(&fs);
 	ed.write("Hello");  
 
 	ZipDecorator zd(&ed);
