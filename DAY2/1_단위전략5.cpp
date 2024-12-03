@@ -15,14 +15,14 @@ public:
 	{
 		void* p = malloc(sizeof(T) * sz);
 
-		printf("[debug_alloc] allocate %p, %d cnts\n", p, sz);
+		printf("[debug_alloc] allocate %p, %zd cnts\n", p, sz);
 		
 		return static_cast<T*>(p);
 	}
 
 	inline void deallocate(T* p, std::size_t sz)
 	{
-		printf("[debug_alloc] deallocate %p, %d cnts\n", p, sz);
+		printf("[debug_alloc] deallocate %p, %zd cnts\n", p, sz);
 
 		free(p);
 	}
@@ -30,9 +30,7 @@ public:
 	// 위 2개가 핵심이고, 아래 3개가 더필요합니다. 관례적인 코드
 	// 항상 복사해서 사용하면 됩니다.
 	using value_type = T;
-
 	debug_alloc() {}
-
 	template<typename U> debug_alloc(const debug_alloc<U>&) {}
 							// generic 생성자 개념. 
 };
@@ -45,14 +43,15 @@ int main()
 
 	std::vector<int, debug_alloc<int> > v;
 
+	std::cout << "-----------------" << std::endl;
+
+	v.resize(4);	// 4개 메모리 할당
 
 	std::cout << "-----------------" << std::endl;
 
-	v.resize(4);
-
-	std::cout << "-----------------" << std::endl;
-
-	v.resize(8);
+	v.resize(8);	// 1. 8개 메모리 할당
+					// 2. 4개 버퍼 => 8개 버퍼에 복사
+					// 3. 4개 버퍼(메모리)제거
 
 	std::cout << "-----------------" << std::endl;
 }
