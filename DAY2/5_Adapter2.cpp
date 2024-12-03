@@ -87,8 +87,15 @@ int main()
 }
 
 
+/*
+class Text : public TextView {}; 
+// 상속 : 클래스에 기능 추가, 클래스의 함수 이름 변경
 
-
-
+class ObjectAdapter
+{
+	TextView* tv; // 포인터형태로 포함
+				  // 객체에 기능 추가, 객체에 이름 변경
+};
+*/
 
 
