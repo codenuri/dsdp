@@ -1,3 +1,4 @@
+#include <cstdlib>
 // 방법 #2. strategy 패턴 적용
 // => 변하는 것(메모리 할당/해지 방법)을 별도의 클래스로 설계하자.
 
@@ -12,27 +13,47 @@ struct IAllocator
 };
 
 
+
 template<typename T>
 class vector
 {
 	T* buff = nullptr;
 	int size;
+	IAllocator<T>* alloc = nullptr;
+
 public:
-	vector(int sz) : size(sz)
+	// 이제 vector 의 모든 멤버 함수에서는
+	// 메모리 할당이 필요할때 마다
+	// "allocator(메모리 할당기)" 객체에 의존해야 합니다.
+	vector(int sz, IAllocator<T>* p) : size(sz), alloc(p)
 	{
-		buff = new T[size];
-		//....
+		buff = alloc->allocate(sz);
 	}
 	~vector()
 	{
-		delete[] buff;
-		//....
+		alloc->deallocate(sz);
+	}
+};
+
+// 이제 다양한 방식의 "메모리 할당기" 클래스를 제공하면 됩니다.
+// => IAllocator<T> 인터페이스를 구현해서 만들면 됩니다.
+template<typename T> class MallocAllocator : public IAllocator<T>
+{
+public:
+	virtual T* allocate(int sz)
+	{
+		return static_cast<T*>(malloc(sizeof(T) * sz));
+	}
+	virtual void deallocate(T* p, int sz)
+	{
+		free(p);
 	}
 };
 
 int main()
 {
-	vector<int> v(4);
+	MallocAllocator<int> ax;
+	vector<int> v(4, &ax); // ax 를 사용해서 메모리 관리해 달라.
 }
 
 
