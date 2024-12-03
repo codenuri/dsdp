@@ -19,7 +19,17 @@ public:
 	virtual ~BaseMenu() {}
 
 	std::string get_title() { return title; }
+
+	// 모든 메뉴의 공통의 특징은 이곳에도 있어야 한다.
+	// 모든 메뉴는 "선택될수있다."
+
+	virtual void command() = 0;
 };
+
+
+
+
+
 
 class MenuItem : public BaseMenu
 {
