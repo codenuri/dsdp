@@ -17,6 +17,7 @@ public:
 #include <stack> // 이안에 코드가 위와 거의 동일 합니다.
 				 // stack adapter 라고 부릅니다.
 				 // cppreference.com 에서 Container Library 선택
+
 int main()
 {
 	std::stack<int, std::list<int>> s3;
