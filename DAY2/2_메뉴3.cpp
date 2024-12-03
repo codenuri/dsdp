@@ -31,11 +31,28 @@ public:
 
 	void add(MenuItem* m) { v.push_back(m); }
 
+
 	// 팝업메뉴를 선택 할때 동작을 생각해 봅시다.
 	void command()
 	{
+		int sz = v.size();
+
+		for (int i = 0; i < sz; i++)
+		{
+			std::cout << i + 1 << ". " << v[i]->get_title() << '\n';
+		}
+		std::cout << sz + 1 << ". 종료\n";
+
+		std::cout << "메뉴를 선택하세요 >> ";
+
+		int cmd;
+		std::cin >> cmd;
+
+		v[cmd - 1]->command(); // 선택된 메뉴 실행
 
 	}
+
+
 };
 
 int main()
