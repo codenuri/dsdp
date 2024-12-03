@@ -31,7 +31,7 @@ public:
 	}
 	~vector()
 	{
-		alloc->deallocate(sz);
+		alloc->deallocate(buff, size);
 	}
 };
 
