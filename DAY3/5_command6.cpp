@@ -67,6 +67,20 @@ public:
 	void undo() override { system("cls"); }
 };
 
+// 여러개의 명령을 보관했다가 한번에 실행하는 명령
+class Macro
+{
+	std::vector<ICommand*> v;
+public:
+	void add(ICommand* cmd) { v.push_back(cmd); }
+
+	void execute()
+	{
+		for (auto cmd : v)
+			cmd->execute();
+	}
+};
+
 
 int main()
 {
