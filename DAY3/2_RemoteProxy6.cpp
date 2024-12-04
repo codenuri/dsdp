@@ -2,7 +2,11 @@
 #include "cppmaster.h"
 #include "ICalc.h"
 
+// 아래 코드(규칙)는 어렵지는 않습니다. 그런데
+// => 지루한 코드가 반복되고
+// => 실수 할수 있습니다.(AddRef 또는 Release 호출을 실수로 생략!!!)
 
+// 실수 할수 없도록 해봅시다. => 다음 단계(마지막)
 int main()
 {
 	ICalc* calc1 = load_proxy();
