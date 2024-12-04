@@ -1,12 +1,31 @@
 // ICalc.h
 #pragma once
 
-struct ICalc
+// 레퍼런스 카운팅(참조계수) 기법으로 Proxy의 수명을 관리하는 경우
+// 참조계수 관련 함수는 인터페이스에도 있어야 합니다.
+
+struct IRefCount
+{
+	virtual void AddRef() = 0;
+	virtual void Release() = 0;
+
+	virtual ~IRefCount() {}
+};
+
+struct ICalc : public IRefCount
 {
 	virtual int Add(int a, int b) = 0;
 	virtual int Sub(int a, int b) = 0;
 	virtual ~ICalc() {}
 };
+
+/*
+struct IMoterServerProxy : public IRefCount
+{
+	// 모터 서버 관련 함수
+};
+*/
+
 
 
 
