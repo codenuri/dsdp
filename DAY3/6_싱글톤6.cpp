@@ -2,13 +2,15 @@
 #include <mutex>
 
 // CRTP
+// => Curiously Recurring Template Pattern
+// => 신기하게도 언급될수 있는 템플릿 패턴
 // => 기반 클래스 만들때 미래에 만들어질 파생 클래스 이름을 사용할수 있게
 //    하는 기법 ( C++ IDioms )
 
 template<typename T>
 class Singleton
 {
-private:
+protected:
 	Singleton() {}
 
 	Singleton(const Singleton&) = delete;
@@ -27,8 +29,9 @@ public:
 		return *instance;
 	}
 };
-T* Singleton::instance = nullptr;
-std::mutex Singleton::mtx;
+
+template<typename T> T* Singleton<T>::instance = nullptr;
+template<typename T> std::mutex Singleton<T>::mtx;
 
 // Mouse 도 위처럼 힙에 만드는 싱글톤을 사용하고 싶다.
 
