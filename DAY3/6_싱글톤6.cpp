@@ -1,32 +1,32 @@
 #include <iostream>
 #include <mutex>
 
-class Cursor
+class Singleton
 {
 private:
-	Cursor() {}
+	Singleton() {}
 
-	Cursor(const Cursor&) = delete;
-	Cursor& operator=(const Cursor&) = delete;
+	Singleton(const Singleton&) = delete;
+	Singleton& operator=(const Singleton&) = delete;
 
-	static Cursor* instance;
+	static Singleton* instance;
 	static std::mutex mtx;
 public:
-	static Cursor& get_instance()
+	static Singleton& get_instance()
 	{
 		std::lock_guard<std::mutex> g(mtx);
 
 		if (instance == nullptr)
-			instance = new Cursor;
+			instance = new Singleton;
 
 		return *instance;
 	}
 };
-Cursor* Cursor::instance = nullptr;
-std::mutex Cursor::mtx;
+Singleton* Singleton::instance = nullptr;
+std::mutex Singleton::mtx;
 
 // Mouse 도 위처럼 힙에 만드는 싱글톤을 사용하고 싶다.
-class Mouse
+class Mouse : public Singleton
 {
 
 };
