@@ -49,4 +49,8 @@ int main()
 
 }
 
+// github.com/aosp-mirror		안드로이드 OS 소스 코드 입니다.
+// platform system core         리포지토리 선택
+
+// libutils/include/utils/ Singleton.h 열어 보세요
 
