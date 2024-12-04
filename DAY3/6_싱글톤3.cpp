@@ -10,13 +10,19 @@ private:
 	Cursor(const Cursor&) = delete;
 	Cursor& operator=(const Cursor&) = delete;
 
+	static Cursor* instance;
 public:
 	static Cursor& get_instance()
 	{
-		static Cursor instance;
-		return instance;
+		if (instance == nullptr)
+			instance = new Cursor;
+
+		return *instance;
 	}
 };
+Cursor* Cursor::instance = nullptr;
+
+
 
 int main()
 {
