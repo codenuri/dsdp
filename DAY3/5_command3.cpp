@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack>
 
 class Shape
 {
@@ -84,23 +85,33 @@ public:
 int main()
 {
 	std::vector<Shape*> v;
+	
+	std::stack<ICommand*> undo_stack;
+	std::stack<ICommand*> redo_stack;
+	ICommand* command;
 
 	while (1)
 	{
 		int cmd;
 		std::cin >> cmd;
 
-		// 생각해볼 문제 #1. undo/redo 기능을 구현하려면 어떻게 해야 할까요 ?
-		// => "command 패턴" 을 사용하면 됩니다.
-
-		if (cmd == 1) v.push_back(new Rect);
-		else if (cmd == 2) v.push_back(new Circle);
+		if (cmd == 1)
+		{
+			command = new AddRectCommand(v);
+			command->execute();
+			undo_stack.push(command);
+		}
+		else if (cmd == 2)
+		{
+			command = new AddCircleCommand(v);
+			command->execute();
+			undo_stack.push(command);
+		}
 		else if (cmd == 9)
 		{
-			for (auto s : v)
-			{
-				s->draw(); 
-			}
+			command = new DrawCommand(v);
+			command->execute();
+			undo_stack.push(command);
 		}
 	}
 }
