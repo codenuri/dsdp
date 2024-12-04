@@ -17,7 +17,7 @@ private:
 
 	// 규칙 #2. 컴파일러에게 복사생성자와 대입연산자를 만들지 못하게 한다.
 	Cursor(const Cursor&) = delete;
-	Cursor operator=(const Cursor&) = delete; 
+	Cursor& operator=(const Cursor&) = delete; 
 				// => 복사 금지시에는 대입도 금지 하는 것이 관례
 
 
@@ -38,12 +38,19 @@ int main()
 	std::cout << &c1 << std::endl;
 	std::cout << &c2 << std::endl;
 
-	Cursor c3 = c1; // 일반 생성자가 아닌 컴파일러가 만드는 복사 생성자사용
+//	Cursor c3 = c1; // 일반 생성자가 아닌 컴파일러가 만드는 복사 생성자사용
 					// 이렇게 만드는 것도 막아야 합니다.
 
 //	Cursor c1, c2; // error
 }
 
+// 위 코드가 "effective-c++ 책" 의 저자인 "scott-meyer" 가 처음 만든 코드
+// => "meyer's singleton" 이라고 하고
+// 
+// => 현재 C++ 진영에서 가장 좋은 코드라고 알려진 방식
+// => 싱글톤 사용하려면 위코드로 하세요
+
+// => 특징: 오직 한개의 객체가 static 지역변수인 모델
 
 
 
