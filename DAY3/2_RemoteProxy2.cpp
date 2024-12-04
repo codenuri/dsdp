@@ -12,6 +12,18 @@ public:
 	int Add(int a, int b) { return ec_send_server(server, 1, a, b); };
 	int Sub(int a, int b) { return ec_send_server(server, 2, a, b); };
 };
+// Proxy 가 도입되서 
+// 
+// 1. 클라이언트 제작자는 IPC 기술을 몰라도 됩니다.
+// 
+// 2. 서버 장애에 대한 대응, 자주 사용되는 연산의 결과에 대한
+//    캐쉬 보관등 다양한 기능을 Proxy 에 추가할수 있습니다.
+
+// 3. 1, 2 라는 명령 코드 대신 Add(), Sub() 라는 함수 이름 사용하면됩니다.
+
+
+
+
 
 
 int main()
