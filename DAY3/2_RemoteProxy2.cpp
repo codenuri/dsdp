@@ -7,24 +7,22 @@ class Calc
 {
 	int server;
 public:
-	Calc() { }
+	Calc() { server = ec_find_server("Calc"); }
 
-	int Add(int a, int b) { return ? };
-	int Sub(int a, int b) { return ? };
+	int Add(int a, int b) { return ec_send_server(server, 1, a, b); };
+	int Sub(int a, int b) { return ec_send_server(server, 2, a, b); };
 };
 
 
 int main()
 {
-	// 1. 서버의 핸들을 얻어 옵니다.
-	int server = ec_find_server("Calc");
-
-
-	std::cout << "서버 번호 : " << server << std::endl;
-
-	// 2. 서버에 명령코드와 파라미터를 전달합니다.
-	int n1 = ec_send_server(server, 1, 10, 20); // 10 + 20 요청
-	int n2 = ec_send_server(server, 2, 10, 20); // 10 - 20 요청
+	// 위 클래스는 서버 개발자가 만들어주는 클래스 입니다.
+	// 서버를 대신하는 "Proxy" 입니다.
+	// 이제 클라이언트 개발자는 실제 서버에 접속하지말고 Proxy 를 사용합니다
+	Calc* calc = new Calc;
+	
+	int n1 = calc->Add(10, 20);
+	int n2 = calc->Sub(10, 20);
 
 	std::cout << n1 << ", " << n2 << std::endl;
 
