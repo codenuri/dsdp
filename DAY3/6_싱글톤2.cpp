@@ -5,28 +5,29 @@
 class Cursor
 {
 private:
-	Cursor() {}
+	Cursor() { std::cout << "Cursor()\n"; }
+
 	Cursor(const Cursor&) = delete;
 	Cursor& operator=(const Cursor&) = delete;
 
 //	Cursor instance;		// 이코드는 에러 지만
-	static Cursor instance; // 이 코드는 에러 아닙니다.
-
+//	static Cursor instance; // 이 코드는 에러 아닙니다.
 public:
 	static Cursor& get_instance()
 	{
-//		static Cursor instance;
+		static Cursor instance;
 
 		return instance;
 	}
-
 };
-Cursor Cursor::instance;
+//Cursor Cursor::instance;
 
 
 int main()
 {
-	Cursor& c1 = Cursor::get_instance();
+	std::cout << "main\n";
+
+//	Cursor& c1 = Cursor::get_instance();
 
 }
 
