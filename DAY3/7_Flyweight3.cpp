@@ -49,6 +49,8 @@ public:
 
 int main()
 {
+	// 공장은 한개만 만들게 하는것이 좋을때가 있습니다.
+	// => 싱글톤 패턴 사용. (내일 많이 나옵니다.)
 	ImageFactory factory;
 
 	Image* img1 = factory.create("www.naver.com/a.png");
