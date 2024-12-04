@@ -37,7 +37,10 @@ template<typename T> std::mutex Singleton<T>::mtx;
 
 class Mouse : public Singleton< Mouse  >
 {
+};
 
+class Keyboard : public Singleton< Keyboard  >
+{
 };
 
 int main()
