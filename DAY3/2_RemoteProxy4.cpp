@@ -25,9 +25,10 @@ ICalc* load_proxy()
 }
 
 
+
 int main()
 {
-	ICalc* calc = new ? ;  
+	ICalc* calc = load_proxy();  
 
 	int n1 = calc->Add(10, 20);
 	int n2 = calc->Sub(10, 20);
