@@ -31,15 +31,15 @@ struct ICommand
 	virtual ~ICommand() {}
 };
 
-// 도형을 추가하는 명령은 유사한점이 많이 있습니다.
-// 기반 클래스로 제공합니다.
+
+template<typename T>
 class AddCommand : public ICommand
 {
 	std::vector<Shape*>& v;
 public:
 	AddCommand(std::vector<Shape*>& v) : v(v) {}
 
-	void execute() override { v.push_back( create_shape() ); }
+	void execute() override { v.push_back( new T ); }
 	bool can_undo() override { return true; }
 
 	void undo() override
@@ -48,33 +48,8 @@ public:
 		v.pop_back();
 		delete s;
 	}
-
-	// 객체를 만들기 위한 인터페이스를 제공하고, 실제 사용도 하지만
-	// 어떤 타입의 객체를 만들지는 파생 클래스가 결정합니다.
-	// => template method 의 전형적인 형태인데,
-	// 
-	// => 가상함수가 하는 일이 "객체의 종류를 결정" 한다면 
-	//    "factory method" 라고 합니다.(내일 자세히)
-
-	virtual Shape* create_shape() = 0;
 };
 
-
-class AddRectCommand : public AddCommand
-{
-public:
-	AddRectCommand(std::vector<Shape*>& v) : AddCommand(v) {}
-
-	Shape* create_shape() override { return new Rect; }
-};
-
-class AddCircleCommand : public AddCommand
-{
-public:
-	AddCircleCommand(std::vector<Shape*>& v) : AddCommand(v) {}
-
-	Shape* create_shape() override { return new Circle; }
-};
 
 
 
@@ -108,13 +83,13 @@ int main()
 
 		if (cmd == 1)
 		{
-			command = new AddRectCommand(v);
+			command = new AddCommand<Rect>(v);
 			command->execute();
 			undo_stack.push(command);
 		}
 		else if (cmd == 2)
 		{
-			command = new AddCircleCommand(v);
+			command = new AddCommand<Circle>(v);
 			command->execute();
 			undo_stack.push(command);
 		}
@@ -135,7 +110,7 @@ int main()
 				{
 					command->undo();
 
-					delete command; 
+					delete command;
 				}
 			}
 		}
