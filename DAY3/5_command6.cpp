@@ -90,6 +90,24 @@ int main()
 	std::stack<ICommand*> redo_stack;
 	ICommand* command;
 
+
+	Macro* mc1 = new Macro;
+	mc1->add(new AddCommand<Rect>(v));
+	mc1->add(new AddCommand<Circle>(v));
+	mc1->add(new DrawCommand(v));
+
+	mc1->execute(); // 3개 명령을 한번에 실행
+
+	Macro* mc2 = new Macro;
+	mc2->add(new AddCommand<Rect>(v));
+	mc2->add( ? );
+	mc2->execute();
+
+
+
+
+
+
 	while (1)
 	{
 		int cmd;
