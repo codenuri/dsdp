@@ -5,6 +5,9 @@
 // Proxy 패턴 : 기존 요소를 대신할 요소를 만드는 것!!
 
 //  Raw Pointer 를 사용하지 말고 대신할 것을 만들어봅시다.
+// => C++의 스마트 포인터 기술
+// => 스마트 포인터가 결국 "포인터를 대신" 하는 역활의 객체를 사용하자이므로
+//    "proxy 패턴" 입니다. "smart proxy" 라고 합니다.
 
 template<typename T>
 class sp
@@ -22,7 +25,6 @@ public:
 	T* operator->() { return obj; }
 	T& operator*() { return *obj; }
 };
-
 int main()
 {
 	sp<ICalc> calc1 = load_proxy();
