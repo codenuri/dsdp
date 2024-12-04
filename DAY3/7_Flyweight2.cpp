@@ -26,6 +26,7 @@ public:
 		if (it == image_map.end()) // 없을때
 		{
 			img = new Image(url);
+			image_map[url] = img;
 		}
 		else
 			img = it->second; // map 의 반복자는 pair 인데
