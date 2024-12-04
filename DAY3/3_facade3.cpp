@@ -67,7 +67,8 @@ public:
 class TCPServer
 {
 	NetworkInit init;
-	Socket sock(SOCK_STREAM); 
+//	Socket sock(SOCK_STREAM); // 멤버 데이타 안에서 생성자 인자를 전달할때는 () 하지말고
+	Socket sock{ SOCK_STREAM };// {} 로 만 가능합니다.
 public:
 	void Start(const char* ip, short port)
 	{
