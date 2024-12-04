@@ -68,7 +68,7 @@ public:
 };
 
 // 여러개의 명령을 보관했다가 한번에 실행하는 명령
-class Macro
+class Macro : public ICommand
 {
 	std::vector<ICommand*> v;
 public:
@@ -98,9 +98,10 @@ int main()
 
 	mc1->execute(); // 3개 명령을 한번에 실행
 
+
 	Macro* mc2 = new Macro;
 	mc2->add(new AddCommand<Rect>(v));
-	mc2->add( ? );
+	mc2->add( mc1 );
 	mc2->execute();
 
 
