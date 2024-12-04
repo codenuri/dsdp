@@ -30,7 +30,8 @@ int main()
 	// Calc* calc = new Calc;
 
 	// 약한결합으로 사용해야 합니다.
-	ICalc* calc = new ? ;
+	ICalc* calc = new ? ;  // ? 를 어떻게 해야 할까요 ??
+						   // 해결책은 다음소스에서!!
 
 	int n1 = calc->Add(10, 20);
 	int n2 = calc->Sub(10, 20);
