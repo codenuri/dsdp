@@ -33,6 +33,13 @@ public:
 	}
 	void play() { impl->play(); }
 	void stop() { impl->stop(); }
+
+	void play_one_minute()
+	{
+		impl->play();
+		// 타이머 설치후 1분뒤에
+		impl->stop();
+	}
 };
 
 // 이제 모든 클래스는 IMP3 대신 MP3 를 사용하게 합니다.
