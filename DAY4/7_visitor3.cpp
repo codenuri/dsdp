@@ -21,6 +21,8 @@ public:
 	}
 };
 
+void Zero(int& e) { e = 0; }
+
 int main()
 {
 	MyList<int> s = { 1,2,3,4,5,6,7,8,9,10 };
@@ -30,9 +32,10 @@ int main()
 	// 람다표현식은 () 연산됩니다.
 
 	// 아래 스타일이 Java 에 있습니다.(accept 가 아닌 ForEach)
-	s.accept([](int& e) { e = e * 2; });
+	s.accept([](int& e) { e *= 2; }); // s.accept( e => e *= 2)
 	s.accept([](int e) { std::cout << e << std::endl; });
 
+	s.accept(Zero);
 }
 
 
