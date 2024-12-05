@@ -9,15 +9,16 @@
 
 #include <ranges>
 
+namespace RG = std::ranges;
 
 int main()
 {
 	std::vector<int> v = { 1,2,3,4,5 };
 
-	using RG = std::ranges;
 
 //	for (auto e : RG::take_view(v, 3))
-	for (auto e : RG::reverse_view(v))
+//	for (auto e : RG::reverse_view(v))
+	for (auto e : RG::reverse_view( RG::take_view(v, 3) ) )
 	{
 		std::cout << e << ", ";
 	}
