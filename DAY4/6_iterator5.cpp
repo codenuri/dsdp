@@ -62,13 +62,17 @@ int main()
 	// auto 권장
 	//slist_iterator<int> it = s.iterator(); 
 
-	auto it = s.iterator();
+	auto it = s.begin();
 
 	// 이제 it 는 포인터는 아니지만 포인터와 동일한 사용법을 제공합니다.
 	++it;
 
 	std::cout << *it << std::endl;
 }
+
+
+
+
 
 // 위 코드는 전통적인 디자인 패턴에서 사용하는 iterator 구현 입니다.
 // => Java, C#, Python, Swift 등 대부분의 언어는 위코드와 유사하게 구현합니다.
