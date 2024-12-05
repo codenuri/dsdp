@@ -120,8 +120,8 @@ int main()
 	ShapeFactory& factory = ShapeFactory::get_instance();
 
 
-	factory.register_shape(1, &Rect::create);
-	factory.register_shape(2, &Circle::create);
+//	factory.register_shape(1, &Rect::create);
+//	factory.register_shape(2, &Circle::create);
 
 
 	while (1)
