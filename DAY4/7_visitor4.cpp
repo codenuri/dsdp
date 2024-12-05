@@ -6,6 +6,9 @@
 // list : 선형 구조이고, 모든 요소의 타입이 동일 합니다.
 // Menu : Tree 구조이고, 요소의 타입이 다를수 있습니다.
 
+class MenuItem;
+class PopupMenu;
+
 struct IMenuVisitor
 {
 	// 아래 처럼 하면 모든 메뉴 객체를 받을수 있지만
@@ -14,9 +17,7 @@ struct IMenuVisitor
 
 	// 아래 처럼해야 다른 동작이 됩니다.
 	virtual void visit(MenuItem* m) = 0;
-	virtual void visit(PopupMenu* m) = 0;
-
-	
+	virtual void visit(PopupMenu* m) = 0;	
 
 	virtual ~IMenuVisitor() {}
 };
@@ -90,7 +91,23 @@ public:
 
 };
 
+// 메뉴의 타이틀을 변경하는 방문자
+class MenuTitleChangeVisitor : public IMenuVisitor
+{
+	std::string item_deco;
+	std::string popup_deco;
+public:
+	MenuTitleChangeVisitor(const std::string& s1, const std::string& s2)
+		: popup_deco(s1), item_deco(s2) {}
 
+	void visit(MenuItem* m) override
+	{
+	}
+	void visit(PopupMenu* m) override
+	{
+	}
+
+};
 
 
 
