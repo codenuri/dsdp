@@ -19,8 +19,12 @@ public:
 };
 
 // Rect 객체를 만드는 2가지 방법
-// 1. Rect* rc = new Rect;
-// 2. Rect* rc = Rect::create();
+// 1. Rect* rc = new Rect;			=> 클래스 이름을 알아야 합니다.
+// 2. Rect* rc = Rect::create();	=> 클래스 이름을 몰라도 함수 포인터만
+//										알면 객체를 만들수 있습니다.
+
+// C++ 에서는 "클래스이름"을 컨테이너(vector등)에 보관할수 없습니다.
+v.push_back("Rect");
 
 
 
