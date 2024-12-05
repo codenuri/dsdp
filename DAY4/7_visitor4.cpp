@@ -176,10 +176,20 @@ int main()
 	pm2->add_menu(new MenuItem("GREEN", 22));
 	pm2->add_menu(new MenuItem("BLUE", 23));
 
-	MenuTitleChangeVisitor v(" >", "");
+
+	MenuTitleChangeVisitor v(" >", "*");
 
 	root->accept(&v);
 
+	// 이제 Menu 에 대해서 다양한 연산이 필요 하면
+	// MenuTitleChangeVisitor 와 같은 것을 만드세요
+	// 그리고 root 에 넣으세요
+//	TitleColorVisitor v2(red, green);
+//	root->accept(&v2);
+
+
+	// Menu 는 iterator 같은 것이 없으므로 외부에서는 열거 못합니다.
+	// 방문자를 사용하면 됩니다.
 
 	root->command();
 
