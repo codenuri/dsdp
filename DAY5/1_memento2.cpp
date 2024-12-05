@@ -54,8 +54,6 @@ public:
 };
 
 
-
-
 int main()
 {
 	Graphics g;
@@ -80,7 +78,9 @@ int main()
 	g.Restore(token); // 복구
 }
 
-
+// Undo 를 할때 사용할수 있는 패턴
+// Memento : 상태 저장 방식의 undo, 메모리 사용량 커질수 있다.
+// Command : 동작의 취소에 의한 undo, 사용자가 어떻게 undo 할지를 코드로 작성
 
 
 
