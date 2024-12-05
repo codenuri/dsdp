@@ -39,14 +39,18 @@ class MyList : public std::list<T>,	public IAcceptor<T>
 public:
 	void accept(IVisitor<T>* visitor)
 	{
-
+		for (auto& e : *this)  // *this 를 잘생각해보세요
+		{
+			visitor->visit(e);
+		}
 	}
 };
 
 
 int main()
 {
-	std::list<int> s = { 1,2,3,4,5,6,7,8,9,10 };
+//	std::list<int> s = { 1,2,3,4,5,6,7,8,9,10 };
+	MyList s = { 1,2,3,4,5,6,7,8,9,10 };
 
 	TwiceVisitor<int> tv;  
 	s.accept(&tv);         
