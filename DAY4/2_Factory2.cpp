@@ -45,6 +45,8 @@ class Circle : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
+
+	static Shape* create() { return new Circle; }
 };
 
 
