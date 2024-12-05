@@ -96,6 +96,9 @@ int main()
 	pm2->add_menu(new MenuItem("GREEN", 22));
 	pm2->add_menu(new MenuItem("BLUE", 23));
 
+	MenuTitleChangeVisitor v(" >", "");
+	root->accept(&v);
+
 
 	root->command();
 
