@@ -49,16 +49,23 @@ public:
 
 
 
+#define REGISTER(key, classname)					\
+static Shape* create() { return new classname; }	\
+inline static AutoRegister ar{ key, &classname::create };
+
+
+
 class Rect : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-	static Shape* create() { return new Rect; }
-
-	static AutoRegister ar;
+	REGISTER(1, Rect)
 };
-AutoRegister Rect::ar(1, &Rect::create);
+
+
+
+
 
 
 
@@ -67,13 +74,16 @@ class Circle : public Shape
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
-	static Shape* create() { return new Circle; }
-
-
-	inline static AutoRegister ar{ 2, &Circle::create };
+	REGISTER(2, Circle)
 };
 
+class Triangle : public Shape
+{
+public:
+	void draw() override { std::cout << "draw Triangle" << std::endl; }
 
+	REGISTER(3, Triangle)
+};
 
 
 
