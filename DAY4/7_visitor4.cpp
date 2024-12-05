@@ -3,6 +3,24 @@
 #include <vector>
 #include <conio.h> 
 
+// list : 선형 구조이고, 모든 요소의 타입이 동일 합니다.
+// Menu : Tree 구조이고, 요소의 타입이 다를수 있습니다.
+
+struct IMenuVisitor
+{
+	// 아래 처럼 하면 모든 메뉴 객체를 받을수 있지만
+	// => 같은 동작을 하게 됩니다.
+//	virtual void visit(BaseMenu* m) = 0;
+
+	// 아래 처럼해야 다른 동작이 됩니다.
+	virtual void visit(MenuItem* m) = 0;
+	virtual void visit(PopupMenu* m) = 0;
+
+	
+
+	virtual ~IMenuVisitor() {}
+};
+
 
 class BaseMenu
 {
@@ -97,6 +115,7 @@ int main()
 	pm2->add_menu(new MenuItem("BLUE", 23));
 
 	MenuTitleChangeVisitor v(" >", "");
+
 	root->accept(&v);
 
 
