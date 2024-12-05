@@ -66,9 +66,12 @@ public:
 		// 1. 인자로 전달된 값으로만으로도 그릴수 있다면 그리면 된다.
 		// 2. 더 많은 데이타가 필요하면 Table에 접근해서 data 를 얻어 온다.
 
-		int* data = subject->get_data(); // ??
+//		int* data = subject->get_data(); // error.
+										 // subject 는 Table 의 주소지만
+										 // 타입이 "Subject*" 입니다
+		int* data = static_cast<Table*>(subject)->get_data();
 
-
+		// 이제 data 를 사용해서 Graph 를 update 하면 됩니다.
 
 		std::cout << "Bar Graph : ";
 
