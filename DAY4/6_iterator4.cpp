@@ -26,6 +26,26 @@ template<typename T> struct ICollection
 };
 
 //------------------------------------------------
+// 싱글리스트 반복자
+template<typename T> 
+class slist_iterator : public IIterator<T>
+{
+	Node<T>* current;
+public:
+	slist_iterator(Node<T>* p = nullptr)
+		: current(p) {}
+
+	T& next() override
+	{
+		T& tmp = current->data;
+		current = current->next;
+		return tmp;
+	}
+	bool hasNext() override
+	{
+		return current != nullptr;
+	}
+};
 
 
 
@@ -33,11 +53,23 @@ template<typename T> struct ICollection
 
 
 
-template<typename T> struct slist
+
+
+
+// 모든 컬렉션에서는 iterator 를 꺼낼수 있어야 한다.
+template<typename T> struct slist : public ICollection<T>
 {
 	Node<T>* head = 0;
 public:
 	void push_front(const T& a) { head = new Node<T>(a, head); }
+
+
+
+
+	IIterator<T>* iterator() override
+	{
+		return new slist_iterator<T>(head); // 1번재 노드로 초기화된 반복자
+	}
 };
 
 
@@ -50,4 +82,13 @@ int main()
 	s.push_front(20);
 	s.push_front(30);
 	s.push_front(40);
+
+	IIterator<int>* it = s.iterator();
+
+	while (it->hasNext())
+	{
+		std::cout << it->next() << std::endl;
+					// #1. it 가 가리키는 값 반환
+					// #2. it 는 다음으로 이동
+	}
 }
