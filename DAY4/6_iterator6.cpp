@@ -30,7 +30,24 @@ public:
 	{
 		return current->data;
 	}
+
+	// 반복자를 raw pointer 처럼 사용하려면 == 와 != 연산이 되어야 합니다.
+	inline bool operator==(const slist_iterator& other)
+	{
+		return current == other.current;
+	}
+
+	inline bool operator!=(const slist_iterator& other)
+	{
+		return current != other.current;
+	}
 };
+
+
+
+
+
+
 
 // 반복자를 꺼내는 멤버 함수를 "begin" 이라는 이름으로 약속(문서)하자.
 template<typename T> struct slist
@@ -44,7 +61,12 @@ public:
 	slist_iterator<T> begin()
 	{
 		slist_iterator<T> it(head);
+		return it;
+	}
 
+	slist_iterator<T> end()
+	{
+		slist_iterator<T> it( nullptr );
 		return it;
 	}
 };
