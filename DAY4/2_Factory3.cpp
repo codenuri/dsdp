@@ -79,7 +79,7 @@ AutoRegister Rect::ar(1, &Rect::create);
 // Rect* r3 = new Rect; // Rect 생성자 호출
 						// 즉, 생성자는 "객체를 만들때 마다" 호출
 						// 객체당 1번
-
+/*
 // C#
 class Car
 {
@@ -92,7 +92,7 @@ Car c1 = new Car(); // static 생성자 호출
 Car c2 = new Car(); // instance 생성자 호출
 Car c3 = new Car(); // instance 생성자 호출
 
-
+*/
 
 class Circle : public Shape
 {
@@ -100,6 +100,11 @@ public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
 	static Shape* create() { return new Circle; }
+
+	// C++17 부터는 아래 처럼하면 외부선언 필요 없습니다.
+	// => inline static
+	// => 프로젝트메뉴=> DAY4속성 메뉴 에서 C++버전 C++17 로 변경하세요
+	inline static AutoRegister ar{ 2, &Circle::create };
 };
 
 
