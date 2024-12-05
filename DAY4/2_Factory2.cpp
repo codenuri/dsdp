@@ -63,13 +63,18 @@ public:
 		create_map[key] = c;
 	}
 
-
-
-	Shape* create(int type)
+	Shape* create(int key)
 	{
 		Shape* p = nullptr;
-		if (type == 1)	p = new Rect;
-		else if (type == 2)	p = new Circle;
+	
+		auto it = create_map.find(key);
+		
+		if (it != create_map.end())
+		{
+			p = it->second(); // it->first : 도형 번호
+							  // it->second : 생성함수 주소 이므로
+							  // () 붙이면 호출입니다.
+		}
 		return p;
 	}
 };
