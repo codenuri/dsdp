@@ -12,7 +12,7 @@ int main()
 
 	// 위 코드는 컴파일러가 아래 처럼 변경합니다.
 	auto first = v.begin();
-	auto last = v.end();
+	auto last  = v.end();
 
 	for (; first != last; ++first)
 	{
