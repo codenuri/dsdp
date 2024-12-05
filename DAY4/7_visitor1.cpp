@@ -30,7 +30,15 @@ int main()
 
 	ShowVisitor<int> sv; // 방문하는 모든 요소를 화면 출력
 	s.accept(&sv);
+
+	// accept 는 다양한 방문자를 받을수 있어야 한다.
+	// => accept(?) ? 의 타입은 ? 
+	// => IVisitor 가 필요 하다.
+
+	// list 뿐 아니라 vector, set 등에도 accept 가 있어야 한다.
+	// => 컨테이너의 인터페이스를 만들어서 약속.
 }
+
 
 
 
