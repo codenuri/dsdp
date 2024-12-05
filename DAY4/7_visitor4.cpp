@@ -35,6 +35,8 @@ public:
 	void set_title(const std::string& s) { title = s; }
 
 	virtual void command() = 0;
+
+	virtual void accept(IMenuVisitor* visitor) = 0;
 };
 
 
@@ -77,13 +79,11 @@ public:
 		// #1. 자신을 먼저 방문자에 전달
 		visitor->visit(this);
 
-
 		// #2. 자신의 하위 메뉴를 전달하면
 		// 직계 자식만 전달됩니다.
 		// 아래 처럼하면 안됩니다.
 		//for (auto m : v)
 		//	visitor->visit(m);
-
 		
 		// #2. 자신의 하위 메뉴에 방문자를 방문 시켜야 합니다.
 		for (auto m : v)
