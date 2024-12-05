@@ -34,6 +34,17 @@ public:
 		return key;
 	}
 
+	void Restore(int key)
+	{
+		auto it = memento_map.find(key);
+
+		if (it != memento_map.end())
+		{
+			penColor = it->second->penColor;
+			penWidth = it->second->penWidth;
+		}
+	}
+
 
 	void DrawLine(int x1, int y1, int x2, int y2)
 	{
