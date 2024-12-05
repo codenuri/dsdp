@@ -63,7 +63,10 @@ int main()
 	ShowVisitor<int> sv; 
 	s.accept(&sv);
 
+	ZeroVisitor<int> zv;  
+	s.accept(&zv);
 
+	s.accept(&sv); // 0, 0,0 ,0 ... 나오게 위 ZeroVisitor 만드세요
 }
 
 
