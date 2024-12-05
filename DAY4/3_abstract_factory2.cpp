@@ -47,7 +47,7 @@ struct IFactory
 
 
 //  style 별로 각 콘트롤을 만드는 공장
-class WinFactory 
+class WinFactory : public IFactory
 {
 public:
 	IButton* CreateButton() { return new WinButton; }
@@ -55,7 +55,7 @@ public:
 	virtual ~WinFactory() {}
 };
 
-class OSXFactory 
+class OSXFactory : public IFactory
 {
 public:
 	IButton* CreateButton() { return new OSXButton; }
