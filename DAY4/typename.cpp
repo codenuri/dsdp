@@ -19,8 +19,13 @@ void foo()
 	// => 이름의 의미에 따라 * 등의 연산자의 의미가 달라진다.
 
 	// 아래 코드를 컴파일러가 어떻게 해석해야 할까요 ?
+	// dependent name : 템플릿 인자 T 에 의존해서 얻는 이름!!
+	//				    => 컴파일러가 무조건 값으로 해석
 	T::value* p;
-	T::DWORD* p;
+//	T::DWORD* p2;	// error. 곱하기로 해석해야 하는데, p2 라는 변수가 없다
+	typename T::DWORD* p2; // ok. dependent name 을 값이 아닌
+							//    타입으로 해석해 달라.
+							//    p2를 포인터 변수의 선언으로 해석
 }
 
 int main()
