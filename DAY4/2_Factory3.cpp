@@ -65,11 +65,32 @@ public:
 
 	// static 멤버 데이타의 특징을 생각해 보세요
 	// => 언제 생성되는지 ?
+	// => 결국 Rect 가 사용하는 "전역변수" 입니다
+	// => main 함수 실행이전에 생성됩니다. ar 생성자 호출. 
 	static AutoRegister ar;
 };
 AutoRegister Rect::ar(1, &Rect::create);
 
+//						// Rect::ar 의 생성자 호출
+//						// => 즉, Rect 라는 클래스에 대해서 최초 1회 실행
+//						// => "객체의 생성자가 아닌 클래스의 생성자개념"
+// Rect* r1 = new Rect;	// Rect 생성자 호출
+// Rect* r2 = new Rect; // Rect 생성자 호출
+// Rect* r3 = new Rect; // Rect 생성자 호출
+						// 즉, 생성자는 "객체를 만들때 마다" 호출
+						// 객체당 1번
 
+// C#
+class Car
+{
+	public Car() {} // instance 생성자
+	static Car() {} // static 생성자 - C# 언어만 있는 문법
+};
+
+Car c1 = new Car(); // static 생성자 호출
+					// instance 생성자 호출
+Car c2 = new Car(); // instance 생성자 호출
+Car c3 = new Car(); // instance 생성자 호출
 
 
 
