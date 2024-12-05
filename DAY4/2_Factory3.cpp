@@ -37,13 +37,7 @@ public:
 	}
 };
 
-class Rect : public Shape
-{
-public:
-	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-	static Shape* create() { return new Rect; }
-};
 
 // 공장에 제품을 등록하기 위한 클래스
 class AutoRegister
@@ -56,11 +50,24 @@ public:
 };
 
 // 전역변수의 생성자가 언제 호출되는지 생각해보세요!!
-AutoRegister ar(1, &Rect::create);
+// 1. 모든 전역변수의 생성자가 호출되고
+// 2. main 함수 실행
+// AutoRegister ar(1, &Rect::create);
 
 
 
+class Rect : public Shape
+{
+public:
+	void draw() override { std::cout << "draw Rect" << std::endl; }
 
+	static Shape* create() { return new Rect; }
+
+	// static 멤버 데이타의 특징을 생각해 보세요
+	// => 언제 생성되는지 ?
+	static AutoRegister ar;
+};
+AutoRegister Rect::ar(1, &Rect::create);
 
 
 
