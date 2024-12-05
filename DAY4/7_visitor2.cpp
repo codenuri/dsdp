@@ -9,17 +9,39 @@ template<typename T> struct IVisitor
 	virtual ~IVisitor() {}
 };
 
+
 // 방문자(visitor) : 결국 "요소 한개에 대한 연산을 정의 하는 클래스"
 template<typename T> class TwiceVisitor : public IVisitor<T>
 {
 public:
-	void visit(T& e) {   };
+	void visit(T& e) { e = e * 2; }
+};
+
+template<typename T> class ShowVisitor : public IVisitor<T>
+{
+public:
+	void visit(T& e) { std::cout << e << std::endl; }
 };
 
 
 
+// 모든 컨테이너는 accept 가 있어야 한다.
+template<typename T> struct IAcceptor
+{
+	virtual void accept(IVisitor<T>* v) = 0;
+	virtual ~IAcceptor() {}
+};
 
+// std::list 를 확장에서 방문자 기능을 제공해 봅시다
+template<typename T> 
+class MyList : public std::list<T>,	public IAcceptor<T>
+{
+public:
+	void accept(IVisitor<T>* visitor)
+	{
 
+	}
+};
 
 
 int main()
