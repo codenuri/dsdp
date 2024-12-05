@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
+#include <map>
 #include "Helper.h"
 
 class Shape
@@ -23,8 +24,13 @@ public:
 // 2. Rect* rc = Rect::create();	=> 클래스 이름을 몰라도 함수 포인터만
 //										알면 객체를 만들수 있습니다.
 
-// C++ 에서는 "클래스이름"을 컨테이너(vector등)에 보관할수 없습니다.
-v.push_back("Rect");
+// C++ 에서는 "클래스이름"을 컨테이너(vector등, 자료구조)에 보관할수 없습니다.
+//v.push_back("Rect"); // 이 코드는 클래스 이름이 아닌 "문자열 Rect" 보관한것
+					 // C++은 문자열 "Rect" 로는 Rect 객체 생성 못합니다.
+
+// 하지만 함수 포인터는 컨테이너에 보관할수 있습니다.
+// v.push_back(&Rect::create); // ok
+// v[0](); // Rect 객체 생성
 
 
 
@@ -46,8 +52,19 @@ public:
 
 class ShapeFactory
 {
+	typedef Shape* (*CREATOR)(); // CREATOR 라는 함수 포인터 타입
+
+	std::map<int, CREATOR> create_map; // [도형번호, 생성함수] 의 쌍을보관
+
 	MAKE_SINGLETON(ShapeFactory)
 public:
+	void register_shape(int key, CREATOR c)
+	{
+		create_map[key] = c;
+	}
+
+
+
 	Shape* create(int type)
 	{
 		Shape* p = nullptr;
