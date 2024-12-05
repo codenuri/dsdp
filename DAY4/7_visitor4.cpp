@@ -44,6 +44,20 @@ class MenuItem : public BaseMenu
 public:
 	MenuItem(const std::string& title, int id) : BaseMenu(title), id(id) {}
 
+
+	// 방문자가 MenuItem 을 방문할때
+	void accept(IMenuVisitor* visitor)
+	{
+		// #1. 자신을 방문자에 전달하기만 하면 됩니다.
+		visitor->visit(this);
+
+		// MenuItem 은 하위 메뉴 없습니다.
+	}
+
+
+
+
+
 	void command() override
 	{
 		std::cout << get_title() << " 메뉴가 선택됨" << std::endl;
@@ -63,7 +77,18 @@ public:
 		// #1. 자신을 먼저 방문자에 전달
 		visitor->visit(this);
 
-		// #2. 
+
+		// #2. 자신의 하위 메뉴를 전달하면
+		// 직계 자식만 전달됩니다.
+		// 아래 처럼하면 안됩니다.
+		//for (auto m : v)
+		//	visitor->visit(m);
+
+		
+		// #2. 자신의 하위 메뉴에 방문자를 방문 시켜야 합니다.
+		for (auto m : v)
+			m->accept(visitor); // 이렇게 해야 합니다.
+
 	}
 
 
