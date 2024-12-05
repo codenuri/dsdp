@@ -33,3 +33,17 @@ class Rect
 
 
 
+Car c = new Car(blue); // 이 코드 보다
+Car c = Car.BlueCar(); // 이렇게 하면 가독성이 좋지 않을까 ?
+Car c = Car.RedCar(); // 이렇게 하면 가독성이 좋지 않을까 ?
+
+
+//std::chrono::system_clock c = std::chrono::system_clock::now()
+
+// RUST 의 객체 생성 방법
+/*
+let s = String::new("hello"); // 여기서 new 는 키워드가 아닙니다.
+								// static 멤버 함수 이름 입니다.
+								// RUST 의 대부분의  타입은
+								// new 라는 static 멤버 함수가 있습니다.
+*/
