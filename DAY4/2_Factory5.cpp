@@ -8,6 +8,8 @@ class Shape
 public:
 	virtual void draw() = 0;
 	virtual ~Shape() {}
+
+	virtual Shape* clone() = 0;
 };
 
 class Rect : public Shape
@@ -16,6 +18,8 @@ public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
 	static Shape* create() { return new Rect; }
+
+	Shape* clone() override { return new Rect(*this); }
 };
 
 
@@ -32,6 +36,8 @@ public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
 	static Shape* create() { return new Circle; }
+
+	Shape* clone() override { return new Circle(*this); }
 };
 
 
@@ -39,26 +45,27 @@ public:
 
 class ShapeFactory
 {
-	typedef Shape* (*CREATOR)(); 
-
-	std::map<int, CREATOR> create_map;
+	std::map<int, Shape*> prototype_map;
 
 	MAKE_SINGLETON(ShapeFactory)
 public:
-	void register_shape(int key, CREATOR c)
+	void register_shape(int key, Shape* c)
 	{
-		create_map[key] = c;
+		prototype_map[key] = c;
 	}
 
 	Shape* create(int key)
 	{
 		Shape* p = nullptr;
 
-		auto it = create_map.find(key);
+		auto it = prototype_map.find(key);
 
-		if (it != create_map.end())
+		if (it != prototype_map.end())
 		{
-			p = it->second(); 
+			p = it->second->clone();  // prototype 패턴이 
+										// 이렇게 하는 것 입니다.
+										// 공장에 견본을 등록하고
+										// 필요 할때 복사본을 얻는것
 		}
 		return p;
 	}
@@ -80,7 +87,8 @@ int main()
 	// 공장에 "클래스"가 아닌 "자주 사용되는 제품"의 견본을 등록해 봅시다.
 	Rect* redRect = new Rect;
 	Rect* blueRect = new Rect;
-	Circle* redCircle = new Circle;
+	Circle* redCircle = new Circle; // 이 객체를 만드는 과정이 복잡하다고 가정
+									// 생성하고, 다양한 설정을 거쳐야 한다고..
 
 	factory.register_shape(1, redRect);
 	factory.register_shape(2, blueRect);
