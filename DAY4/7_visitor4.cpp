@@ -57,6 +57,20 @@ class PopupMenu : public BaseMenu
 public:
 	PopupMenu(const std::string& title) : BaseMenu(title) {}
 
+	// 방문자가 PoupMenu 를 방문할때 - 이부분이 핵심
+	void accept(IMenuVisitor* visitor)
+	{
+		// #1. 자신을 먼저 방문자에 전달
+		visitor->visit(this);
+
+		// #2. 
+	}
+
+
+
+
+
+
 	void add_menu(BaseMenu* p) { v.push_back(p); }
 
 	void command() override
@@ -102,9 +116,15 @@ public:
 
 	void visit(MenuItem* m) override
 	{
+		auto s = m->get_title();
+		s = s + item_deco;
+		m->set_title(s);
 	}
 	void visit(PopupMenu* m) override
 	{
+		auto s = m->get_title();
+		s = s + popup_deco;
+		m->set_title(s);
 	}
 
 };
