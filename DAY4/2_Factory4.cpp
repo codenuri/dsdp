@@ -95,6 +95,14 @@ int main()
 
 	ShapeFactory& factory = ShapeFactory::get_instance();
 
+	// 복습할때 아래 함수 만들어 보세요
+//	factory.show_registered_shape();  // 등록된 모든 제품(도형)
+									// 에 대한 정보를 제공
+									// 1. Rect 2.Circle 3.Triangle 등
+									
+									// 키값도 공장에서 얻어낼수 있게 
+									// 발전시켜 보세요
+
 	while (1)
 	{
 		int cmd;
