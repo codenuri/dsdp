@@ -21,20 +21,17 @@ public:
 	void postNotificationWithName(const std::string& key,
 									void* hint)
 	{
-		for (auto f : nofit_map[key]) // nofit_map[key]는 결국 vector
+		for (auto f : notif_map[key]) // nofit_map[key]는 결국 vector
 			f(hint);
 	}
 };
 
 
-
-
-
-
-
 void foo(void* p)		 { std::cout << "foo : " << (int)p << std::endl; }
-void goo(void* p, int a) { std::cout << "goo : " << (int)p << std::endl; }
-
+void goo(void* p, int a) 
+{ 
+	std::cout << "goo : " << (int)p << ", " << a << std::endl;
+}
 
 int main()
 {
@@ -48,7 +45,8 @@ int main()
 	nc.addObserver("DISCONECT_WIFI", std::bind(&goo, _1, 12) );
 
 	// 배터리 모듈쪽에서 배터리가 부족해지면
-	nc.postNotificationWithName("LOWBATTERY", (void*)30);
+//	nc.postNotificationWithName("LOWBATTERY", (void*)30);
+	nc.postNotificationWithName("DISCONECT_WIFI", 0);
 }
 
 
