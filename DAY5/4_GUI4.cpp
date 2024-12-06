@@ -48,10 +48,21 @@ public:
 	virtual void key_down() {}
 };
 
+// 위 코드의 의도는 결국
+// Window 의 파생클래스를 만들어서 event 처리를 위해 "약속된 가상함수"를
+// override 하라는 것
+class MainWindow : public Window
+{
+public:
+	void lbutton_down() override 
+	{
+		std::cout << "MainWindow lbutton_down()\n";
+	}
+};
 
 int main()
 {
-	Window w;
+	MainWindow w;
 	w.create("hello");
 
 	ec_process_message();
