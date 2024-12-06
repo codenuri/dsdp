@@ -90,5 +90,9 @@ int main()
 
 	t1.set_next(&t2)->set_next(&t3); // t1 => t2 => t3
 
-	t1.handle(7);
+//	t1.handle(7); // t1 이 해결
+//	t1.handle(5); // t2 가 해결
+//	t1.handle(8); // t3 가 해결
+
+	t1.handle(12); // 해결 안됨.
 }
