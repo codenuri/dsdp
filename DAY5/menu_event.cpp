@@ -146,4 +146,11 @@ int main()
 	pm2->add(m);
 
 	root->command();
+
+	// 위 코드는 모든 메뉴를 new 로 만들었습니다.
+	// delete 해야 합니다.
+	// 방법 #1. Raw Pointer 대신 스마트 포인터(std::shared_ptr) 사용
+	// 방법 #2. root 만 delete 하면 모두 delete 될수 있게
+
+	delete root;
 }
