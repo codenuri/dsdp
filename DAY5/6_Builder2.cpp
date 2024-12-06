@@ -70,7 +70,8 @@ int main()
 	American a;
 
 	Director d;
-	d.set_builder(&k); // 국가 선택을 변경하면 이 함수를 다시 호출해서
+	d.set_builder(&a);
+//	d.set_builder(&k); // 국가 선택을 변경하면 이 함수를 다시 호출해서
 						// 인자로 해당 국가의 빌더를 전달합니다.
 
 
