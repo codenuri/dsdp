@@ -14,9 +14,7 @@ public:
 	void create(const std::string& title)
 	{
 		handle = ec_make_window(msgproc, title);
-
 		ec_set_window_rect(handle, 0, 0, 300, 300);
-
 
 		this_map[handle] = this;
 	}
@@ -30,6 +28,11 @@ public:
 		{
 		case WM_LBUTTONDOWN:
 			self->lbutton_down();
+					// => self 는 Window* 타입이고
+					// => lbutton_down() 은 가상이 아니므로 static binding
+					// => 따라서, 포인터 타입인 Window 의 lbuttondown 호출
+					// => MainWindow 것을 호출할수 없다.!!!
+					// => 해결은 다음소스
 			break;
 
 		case WM_KEYDOWN:
@@ -38,15 +41,14 @@ public:
 		}
 		return 0;
 	}
-
-	virtual void lbutton_down() {}
-	virtual void key_down() {}
+	void lbutton_down() {}
+	void key_down() {}
 };
 
 class MainWindow : public Window
 {
 public:
-	void lbutton_down() override
+	void lbutton_down() 
 	{
 		std::cout << "MainWindow lbutton_down()\n";
 	}
