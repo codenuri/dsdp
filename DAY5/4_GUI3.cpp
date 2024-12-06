@@ -18,7 +18,14 @@ public:
 	{
 		switch (msg)
 		{
-		case WM_LBUTTONDOWN: lbutton_down(); break;
+		case WM_LBUTTONDOWN: 
+			lbutton_down();		// 모든 멤버함수는 "객체.함수()"가 되야 합니다
+								// this->lbutton_down() 으로 변경되야하는데
+								// (thiscall1.cpp 의 this->x 와 같은원리)
+								// msgproc 은 static 이므로	this가 없습니다
+								// 그래서 error
+								// => 해결책은 다음소스에서.. !
+			break;
 		case WM_KEYDOWN:     key_down(); break;
 		}
 		return 0;
