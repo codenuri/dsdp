@@ -1,6 +1,12 @@
 ﻿#include <iostream>
 #include <conio.h>
 
+// 각 컨트롤은 자신에 상태가 변경되었을때
+// => 자신만 알면 안되고
+// => 중재자(Mediator)에게도 통보되게 합니다.
+
+
+
 // 중재자의 인터페이스
 struct IMediator
 {
@@ -18,8 +24,8 @@ public:
 
 	CheckBox() : state(false) {}
 	
-	void SetCheck(bool b) { state = b; ChangeState();
-							pMediator->ChangeState(); }
+	void SetCheck(bool b) { state = b; ChangeState();   // 내 가상함수만 호출하지말고
+							pMediator->ChangeState(); } // 중재자에도 전달.. 
 
 	bool GetCheck()       { return state; }
 	virtual void ChangeState() {}
@@ -61,7 +67,7 @@ public:
 	}
 	void ChangeState()
 	{
-		// 이제 모든 협력자의 관계설정은 이곳에 집중됩니다.
+		// 이제 모든 협력자(컨트롤)의 관계설정은 이곳에 집중됩니다.
 		if ( c1->GetCheck() && c2->GetCheck() &&
 			 r1->GetCheck() && r2->GetCheck())
 		{
@@ -78,6 +84,7 @@ int main()
 	CheckBox c1, c2;
 	RadioBox r1, r2;
 	LogInMediator m(&c1, &c2, &r1, &r2);
+
 	_getch(); c1.SetCheck(true);
 	_getch(); c2.SetCheck(true);
 	_getch(); r1.SetCheck(true);
