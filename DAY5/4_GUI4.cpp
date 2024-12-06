@@ -60,10 +60,22 @@ public:
 	}
 };
 
+class ImageView : public Window
+{
+public:
+	void lbutton_down() override
+	{
+		std::cout << "ImageView lbutton_down()\n";
+	}
+};
+
 int main()
 {
-	MainWindow w;
-	w.create("hello");
+	MainWindow w1;
+	w1.create("MainWindow");
+
+	ImageView w2;
+	w2.create("ImageView");
 
 	ec_process_message();
 }
