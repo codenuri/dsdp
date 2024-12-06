@@ -39,7 +39,7 @@ public:
 		switch (msg)
 		{
 		case WM_LBUTTONDOWN:
-			self->lbutton_down();
+			self->handle_lbutton_down();
 			break;
 
 		case WM_KEYDOWN:
@@ -49,7 +49,20 @@ public:
 		return 0;
 	}
 
-	virtual void lbutton_down() {}
+	// 아래 코드가 "chain of responsibility" 의 핵심입니다.
+	void handle_lbutton_down()
+	{
+		// #1. 자신이 먼저 처리를 시도
+		if (lbutton_down() == true)
+			return;
+
+		// #2. 처리하지 않은 경우 부모 윈도우가 있다면 전달
+		if (parent != nullptr)
+			parent->handle_lbutton_down();
+	}
+
+	virtual bool lbutton_down() { return false; }
+
 	virtual void key_down() {}
 };
 
