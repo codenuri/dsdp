@@ -12,10 +12,12 @@ void f4(int a, int b, int c, int d)
 
 int main()
 {
-	f4(1, 2, 3, 4);
+	f4(1, 2, 3, 4); // 4항 함수
 
 	// std::bind : 함수의 인자를 고정한 새로운 함수를 만드는 도구
-	auto a1 = std::bind(&f4, 1, 2, 3, 4);
+	// 사용법 : std::bind(M항함수주소, M개 인자 )
 
-	a1();
+	auto a1 = std::bind(&f4, 1, 2, 3, 4); // 4항함수 => 0항함수
+
+	a1(); // f4(1,2,3,4)
 }
