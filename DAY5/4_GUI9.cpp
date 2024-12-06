@@ -10,7 +10,8 @@ std::map<int, Window*> this_map;
 
 // 클래스 템플릿 만들때
 // => T를 사용하지 않은 멤버가 있다면
-// => 템플릿이 아닌 클래스를 기반 클래스 만들어서 제공해라!!
+// => 템플릿을 사용하지 않는 멤버를 기반 클래스 만들어서 제공해라!!
+// => "thin template" 또는 "template hoisting" 이라고 불리는 기술(C++ IDioms)
 
 class Window
 {
@@ -62,10 +63,7 @@ public:
 class MainWindow : public MsgWindow<MainWindow>
 {
 public:
-	void lbutton_down()
-	{
-		std::cout << "MainWindow lbutton_down()\n";
-	}
+	void lbutton_down() {	std::cout << "MainWindow lbutton_down()\n";	}
 };
 
 
@@ -81,3 +79,11 @@ int main()
 	ec_process_message();
 }
 
+
+
+// GUI4.cpp : event 처리를 가상함수에 의존하는 코드(template method)
+//			 => 가상함수 테이블의 오버헤드가 있습니다.
+
+// GUI9.cpp : event 처리를 CRTP 기술로 해결하는 코드
+//			=> WTL(Window Template Library) 이라는 라이브러리 이 기술 사용
+//			  (office 만들때 사용한 MS 의 라이브러리)
