@@ -1,7 +1,7 @@
 // function1.cpp
 #include <iostream>
 #include <functional>
-
+using namespace std::placeholders; // _1, _2, _3, ... 10°³ ±îÁö 
 void f1(int n1) {}
 void f2(int n1, int n2) {}
 
