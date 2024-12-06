@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <conio.h> 
+#include <functional> // std::bind(), std::function<>
+using namespace std::placeholders;
 
 class BaseMenu
 {
@@ -23,21 +25,7 @@ public:
 
 
 
-class MenuItem : public BaseMenu
-{
-	int  id;
-public:
-	MenuItem(const std::string& title, int id)
-		: BaseMenu(title), id(id) {
-	}
 
-	void command()
-	{
-		std::cout << get_title() << " 메뉴 선택됨\n";
-
-		_getch();
-	}
-};
 
 class PopupMenu : public BaseMenu
 {
@@ -80,6 +68,46 @@ public:
 	}
 };
 
+class MenuItem : public BaseMenu
+{
+	using HANDLER = std::function<void()>; // 인자가 없는 함수
+										   // 그런데, std::bind()가 있으므로
+										   // 모든 함수 등록가능(void반환)
+	std::vector<HANDLER> v; // 메뉴 선택시 여러곳에 전달
+							// 관찰자 패턴응용
+
+
+	int  id;
+
+
+public:
+	MenuItem(const std::string& title, int id, HANDLER h = nullptr )
+		: BaseMenu(title), id(id) 
+	{
+		if (h != nullptr)
+			v.push_back(h);
+	}
+
+	void add_handler(HANDLER h)
+	{
+		if (h != nullptr)
+			v.push_back(h);
+	}
+
+
+
+	void command()
+	{
+		// 메뉴 선택시 등록된 모든 함수에 알려준다.
+		// => 관찰자 패턴
+		for (auto f : v)
+			f();	// f는 function 이므로 ()로 호출가능
+					// 인자 없는 함수.. 
+	}
+};
+
+
+
 int main()
 {
 	PopupMenu* root = new PopupMenu("ROOT");
@@ -89,7 +117,7 @@ int main()
 	root->add(pm1);
 	root->add(pm2);
 
-	pm1->add(new MenuItem("RED", 11));
+	pm1->add(new MenuItem("RED", 11, &foo));
 	pm1->add(new MenuItem("GREEN", 12));
 	pm1->add(new MenuItem("BLUE", 13));
 	pm1->add(new MenuItem("WHITE", 14));
