@@ -83,7 +83,9 @@ public:
 	bool lbutton_down() override
 	{
 		std::cout << "ImageView lbutton_down()\n";
-		return true;
+
+//		return true;	// 이벤트 처리를 끝내겠다는것
+		return false;	// 부모윈도우 에게도 이벤트를 전달해 달라는 의도
 	}
 };
 
@@ -101,3 +103,11 @@ int main()
 	ec_process_message();
 }
 
+// 대부분의 GUI 라이브러리는 위 코드 처럼
+// 자식윈도우에서 발생된 이벤트가 부모윈도우에게도 전달됩니다.
+
+// C# WPF : bubbling event 라고 부릅니다.
+
+// IOS : Responder Chain 이라고 부릅니다.
+
+// C++ MFC : Message Routing 이라고 부릅니다.
