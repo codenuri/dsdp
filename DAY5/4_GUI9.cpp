@@ -14,7 +14,9 @@ std::map<int, Window*> this_map;
 
 class Window
 {
+protected:
 	int handle;
+
 public:
 	// 메세지 처리 관련된 수백개 함수
 	void lbutton_down() {}
