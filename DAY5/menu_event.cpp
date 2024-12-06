@@ -132,7 +132,7 @@ int main()
 	root->add(pm2);
 
 	pm1->add(new MenuItem("RED", 11, &foo));
-	pm1->add(new MenuItem("GREEN", 12, std::bind(&goo, 12) );
+	pm1->add(new MenuItem("GREEN", 12, std::bind(&goo, 12)));
 	pm1->add(new MenuItem("BLUE", 13,  std::bind(&goo, 13)));
 	pm1->add(new MenuItem("WHITE", 14));
 
