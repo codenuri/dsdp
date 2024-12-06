@@ -106,6 +106,20 @@ public:
 	}
 };
 
+void foo()
+{
+	std::cout << "foo 호출됨 - 여기서 메뉴선택시 해야 할일 작성\n";
+	std::cout << "아무키나 누르면 메뉴로 돌아갑니다\n";
+	_getch();
+}
+
+void goo(int id)
+{
+	std::cout << "goo 호출됨 - 여기서 메뉴선택시 해야 할일 작성\n";
+	std::cout << "아무키나 누르면 메뉴로 돌아갑니다\n";
+	_getch();
+}
+
 
 
 int main()
@@ -118,13 +132,18 @@ int main()
 	root->add(pm2);
 
 	pm1->add(new MenuItem("RED", 11, &foo));
-	pm1->add(new MenuItem("GREEN", 12));
-	pm1->add(new MenuItem("BLUE", 13));
+	pm1->add(new MenuItem("GREEN", 12, std::bind(&goo, 12) );
+	pm1->add(new MenuItem("BLUE", 13,  std::bind(&goo, 13)));
 	pm1->add(new MenuItem("WHITE", 14));
 
 	pm2->add(new MenuItem("HD", 21));
 	pm2->add(new MenuItem("FHD", 22));
 	pm2->add(new MenuItem("UHD", 23));
+
+	MenuItem* m = new MenuItem("8K", 24, &foo);
+	m->add_handler(std::bind(&goo, 24));
+
+	pm2->add(m);
 
 	root->command();
 }
