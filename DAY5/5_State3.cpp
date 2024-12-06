@@ -41,9 +41,15 @@ public:
 
 class Character
 {
-	NoItem    state1;
-	SuperItem state2;
-	BadItem   state3;
+	// 아래 3개 클래스는 결국 "동작만 있게 됩니다"
+	// => #1. 크기가 크지 않습니다.
+	// => #2. 2개 만들필요도 없습니다.
+	// => #3. 모든 캐릭터 객체가 공유 해도 됩니다.
+	//        그래서, static 으로 하는 경우도 있습니다.
+	// => 단, 테크닉상, 상태를 가지게 할수도 있고, 그경우는 non-static 으로
+	inline static NoItem    state1;
+	inline static SuperItem state2;
+	inline static BadItem   state3;
 
 	IState* current = &state1;
 
