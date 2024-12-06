@@ -33,6 +33,15 @@ class PopupMenu : public BaseMenu
 public:
 	PopupMenu(const std::string& title) : BaseMenu(title) {}
 
+	~PopupMenu()
+	{
+		for (auto m : v)
+			delete m;
+	}
+
+
+
+
 	void add(BaseMenu* m) { v.push_back(m); }
 
 	void command()
@@ -152,5 +161,7 @@ int main()
 	// 방법 #1. Raw Pointer 대신 스마트 포인터(std::shared_ptr) 사용
 	// 방법 #2. root 만 delete 하면 모두 delete 될수 있게
 
-	delete root;
+	delete root; // PopupMenu 소멸자 호출
+				 // => 소멸자에서 자신의 하위 메뉴 삭제..
+				 // => 결국 재귀적으로 모든 메뉴 delete 됨!!!@
 }
