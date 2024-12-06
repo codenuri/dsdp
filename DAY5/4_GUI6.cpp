@@ -39,7 +39,7 @@ public:
 		switch (msg)
 		{
 		case WM_LBUTTONDOWN:
-			self->handle_lbutton_down();
+			self->handle_lbutton_down(); // 책임의 전가를 구현한 함수
 			break;
 
 		case WM_KEYDOWN:
@@ -70,18 +70,20 @@ public:
 class MainWindow : public Window
 {
 public:
-	void lbutton_down() override
+	bool lbutton_down() override
 	{
 		std::cout << "MainWindow lbutton_down()\n";
+		return true;
 	}
 };
 
 class ImageView : public Window
 {
 public:
-	void lbutton_down() override
+	bool lbutton_down() override
 	{
 		std::cout << "ImageView lbutton_down()\n";
+		return true;
 	}
 };
 
